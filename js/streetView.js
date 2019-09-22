@@ -12,8 +12,8 @@ streetViewModulo = (function () {
               pitch: 10
             }
           });
-
-  }
+         // mapa.StreetView(panorama);
+        }
 
     // Actualiza la ubicación del Panorama
   function fijarStreetView (ubicacion) {
@@ -22,7 +22,7 @@ streetViewModulo = (function () {
          el streetView de la posición actual. */
          panorama.setPosition(ubicacion);
          mapa.setStreetView(panorama);
-  }
+        }
 
   return {
     inicializar,

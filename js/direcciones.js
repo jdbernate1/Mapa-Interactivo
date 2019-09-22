@@ -92,55 +92,55 @@ direccionesModulo = (function () {
     // Calcula la ruta entre los puntos Desde y Hasta con los puntosIntermedios
     // dependiendo de la formaDeIr que puede ser Caminando, Auto o Bus/Subterraneo/Tren
   function calcularYMostrarRutas () {
-
-        /* Completar la función calcularYMostrarRutas , que dependiendo de la forma en que el
+        /* Completar la función calcularYMostrarRutas que dependiendo de la forma en que el
          usuario quiere ir de un camino al otro, calcula la ruta entre esas dos posiciones
          y luego muestra la ruta. */
-         var desde = document.getElementById('desde').value;
-         var hasta = document.getElementById('hasta').value;
-         var comoIr = document.getElementById('comoIr').value;
-         var agregar = document.getElementById('agregar').value;
-         
-         var puntosIntermedios = [];
-         var seleccion = document.getElementById('puntosIntermedios');
-         for (var i = 0; i < seleccion.length; i++) {
-           if (seleccion.options[i].selected) {
-             puntosIntermedios.push({
-               location: seleccion[i].value,
-               stopover: true
-             });
-           }
-         }
-     
-         marcadorModulo.agregarMarcadorRuta(desde, 'Inicio', true);
-         marcadorModulo.agregarMarcadorRuta(hasta, 'Fin', true);
-         marcadorModulo.agregarMarcadorRuta(agregar, 'Intermedio', true);
-     
-         if(comoIr === 'Auto') {
-           comoIr = google.maps.TravelMode.DRIVING
-         } else if(comoIr === 'Caminando') {
-           comoIr = google.maps.TravelMode.WALKING
-         } else {
-           comoIr = google.maps.TravelMode.TRANSIT
-         }
-     
-         var request = {
-           origin: desde,
-           destination: hasta,
-           travelMode: comoIr,
-           waypoints: puntosIntermedios
-         }
-         
-         servicioDirecciones.route(request, function(response, status) {
-           if (status == 'OK') {
-             mostradorDirecciones.setDirections(response);
-             var route = response.routes[0];
-             var summaryPanel = document.getElementById('directions-panel');
-             summaryPanel.innerHTML = '';
-           }
-       })
-  }
+    
+    var desde = document.getElementById('desde').value;
+    var hasta = document.getElementById('hasta').value;
+    var comoIr = document.getElementById('comoIr').value;
+    var agregar = document.getElementById('agregar').value;
+    
+    var puntosIntermedios = [];
+    var seleccion = document.getElementById('puntosIntermedios');
+    for (var i = 0; i < seleccion.length; i++) {
+      if (seleccion.options[i].selected) {
+        puntosIntermedios.push({
+          location: seleccion[i].value,
+          stopover: true
+        });
+      }
+    }
 
+    marcadorModulo.agregarMarcadorRuta(desde, 'Inicio', true);
+    marcadorModulo.agregarMarcadorRuta(hasta, 'Fin', true);
+    marcadorModulo.agregarMarcadorRuta(agregar, 'Intermedio', true);
+
+    if(comoIr === 'Auto') {
+      comoIr = google.maps.TravelMode.DRIVING
+    } else if(comoIr === 'Caminando') {
+      comoIr = google.maps.TravelMode.WALKING
+    } else {
+      comoIr = google.maps.TravelMode.TRANSIT
+    }
+
+    var request = {
+      origin: desde,
+      destination: hasta,
+      travelMode: comoIr,
+      waypoints: puntosIntermedios
+    }
+    
+    servicioDirecciones.route(request, function(response, status) {
+      if (status == 'OK') {
+        mostradorDirecciones.setDirections(response);
+        var route = response.routes[0];
+        var summaryPanel = document.getElementById('directions-panel');
+        summaryPanel.innerHTML = '';
+      }
+  })}
+
+ 
   return {
     inicializar,
     agregarDireccion,

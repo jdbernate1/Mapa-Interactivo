@@ -16,8 +16,7 @@ marcadorModulo = (function () {
           map: mapa,
           animation: google.maps.Animation.BOUNCE
         });
-      
-  }
+      }
 
     // Agrega la dirección del marcador en la lista de Lugares Intermedios
   function agregarDireccionMarcador (marcador) {
